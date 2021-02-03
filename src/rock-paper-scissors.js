@@ -1,24 +1,31 @@
 // loading a function from an external dependency
+//require is to load modules
 const prompt = require("readline-sync").question;
 
+// defining unchanging global variables, 
+//accounting for different format inputs
 const acceptableVariants = {
   rock: ["rock", "Rock", "r", "R"],
   paper: ["paper", "Paper", "p", "P"],
   scissors: ["scissors", "Scissors", "s", "S"],
+
 };
-
+// takes user input and returns in an array if 'acceptable'
 function asStandardChoice(inputStr) {
-  /** An nested array: array of array of strings */
+  /** An nested array: array of array of strings- 
+   * acceptable strings taken from acceptableVariants */
   const arrayOfVariantArrays = Object.values(acceptableVariants);
-
+  
   // alternative `for ... of ...` loop syntax - great for arrays
+  // defines an array and loops it through accaptable variants 
+  //to check if user input matches- if true returns array with user input
   for (let variantArray of arrayOfVariantArrays) {
     if (variantArray.includes(inputStr)) {
       return variantArray[0];
     }
   }
 }
-
+// prints correct winner message
 function declareWinner(userPick, computerPick) {
   const resultMessage = makeResultMessage(userPick, computerPick);
   console.log(resultMessage);
@@ -26,7 +33,7 @@ function declareWinner(userPick, computerPick) {
 
 /**
  * Check if the first choice beats the second choice
- */
+ * defining winning combinations */
 function isWinningChoice(firstChoice, secondChoice) {
   const weaknesses = {
     rock: "paper",
@@ -35,7 +42,8 @@ function isWinningChoice(firstChoice, secondChoice) {
   };
   return weaknesses[secondChoice] === firstChoice;
 }
-
+/* standardising acceptable inputs and returning error message if not accepted
+  and if acceptable returns user input */
 function getUserChoice() {
   while (true) {
     const answer = prompt("Your choice: rock, paper or scissors? \n> ");
@@ -51,7 +59,8 @@ function getUserChoice() {
     }
   }
 }
-
+// returns message if win, lose or draw
+//returns input from user and computer choice too
 function makeResultMessage(userChoice, computerChoice) {
   if (userChoice === computerChoice) {
     return `You both chose ${computerChoice} - it's a draw!`;
@@ -63,18 +72,19 @@ function makeResultMessage(userChoice, computerChoice) {
 }
 
 function playRound() {
-  const computerChoice = randomPick();
+  const computerChoice = randomPick(); 
   const userChoice = getUserChoice();
   declareWinner(userChoice, computerChoice);
 }
-
+/* computer randomly chooses an option from pre-defined dictionary
+returns as computerChoice */
 function randomPick() {
   const choiceOptions = Object.keys(acceptableVariants);
   const randomIndex = Math.floor(Math.random() * choiceOptions.length);
   const computerChoice = choiceOptions[randomIndex];
   return computerChoice;
 }
-
+// export functions so they can be used in other scripts
 module.exports = {
   asStandardChoice,
   isWinningChoice,
