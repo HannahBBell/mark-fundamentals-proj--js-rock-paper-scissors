@@ -5,9 +5,11 @@ const prompt = require("readline-sync").question;
 // defining unchanging global variables, 
 //accounting for different format inputs
 const acceptableVariants = {
-  rock: ["rock", "Rock", "r", "R"],
-  paper: ["paper", "Paper", "p", "P"],
-  scissors: ["scissors", "Scissors", "s", "S"],
+  rock: ["rock", "Rock"],
+  paper: ["paper", "Paper"],
+  scissors: ["scissors", "Scissors"],
+  lizard: ["lizard", "Lizard"],
+  spock:  ["spock", "Spock"],
 
 };
 // takes user input and returns in an array if 'acceptable'
@@ -37,8 +39,15 @@ function declareWinner(userPick, computerPick) {
 function isWinningChoice(firstChoice, secondChoice) {
   const weaknesses = {
     rock: "paper",
+    rock: "spock",
+    paper: "lizard",
     paper: "scissors",
     scissors: "rock",
+    scissors: "spock",
+    lizard: "rock",
+    lizard: "scissors",
+    spock: "paper",
+    spock: "lizard",
   };
   return weaknesses[secondChoice] === firstChoice;
 }
