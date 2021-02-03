@@ -55,7 +55,7 @@ function isWinningChoice(firstChoice, secondChoice) {
   and if acceptable returns user input */
 function getUserChoice() {
   while (true) {
-    const answer = prompt("Your choice: rock, paper or scissors? \n> ");
+    const answer = prompt("Your choice: rock, paper, scissors, lizard or spock? \n> ");
     const standardisedChoice = asStandardChoice(answer);
     if (standardisedChoice) {
       // if choice can be standardised, we can exit out of the while loop with a return of the standardisd choice
